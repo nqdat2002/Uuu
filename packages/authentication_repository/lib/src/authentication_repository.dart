@@ -6,7 +6,7 @@ enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
-
+  late String email = '-';
   Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
     yield AuthenticationStatus.unauthenticated;
@@ -17,7 +17,7 @@ class AuthenticationRepository {
     required String username,
     required String password,
   }) async {
-    final url = Uri.parse('http://127.0.0.1:5000/login');
+    final url = Uri.parse('https://recommendationsys-djkh.onrender.com/login');
 
     final response = await http.post(
       url,
@@ -34,6 +34,7 @@ class AuthenticationRepository {
       final data = jsonDecode(response.body);
       // print(data);
       if (data['status'] == 'success') {
+        email = username;
         _controller.add(AuthenticationStatus.authenticated);
       } else {
         _controller.add(AuthenticationStatus.unauthenticated);
@@ -48,7 +49,7 @@ class AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    final url = Uri.parse('http://127.0.0.1:5000/signup');
+    final url = Uri.parse('https://recommendationsys-djkh.onrender.com/signup');
 
     final response = await http.post(
       url,

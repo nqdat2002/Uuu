@@ -15,7 +15,8 @@ class HomePage extends StatelessWidget {
     return Builder(
       builder: (context) {
         return InkWell(
-            onTap: () {
+            onTap: ()  {
+
               final detailBloc = BlocProvider.of<DetailBloc>(context);
               detailBloc.add(SelectNewsForDetail(article: article));
               Navigator.pushNamed(context, '/detail');

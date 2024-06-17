@@ -42,7 +42,7 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        final user = await _tryGetUser();
+        final user = User('-', _authenticationRepository.email);
         return emit(
           user != null
               ? AuthenticationState.authenticated(user)

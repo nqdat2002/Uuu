@@ -17,3 +17,12 @@ class Fetch extends NewsEvent {
   @override
   String toString() => 'Fetch $type news';
 }
+
+class FetchMixedNews extends NewsEvent {
+  final List<String> categories;
+
+  const FetchMixedNews({required this.categories});
+
+  @override
+  List<Object> get props => [categories];
+}

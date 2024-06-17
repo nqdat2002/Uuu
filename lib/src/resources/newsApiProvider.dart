@@ -10,7 +10,7 @@ class NewsApiProvider {
 
   Future<List<Article>> fetchNewsList({String category = ''}) async {
     var url =
-        "${Constant.baseUrl}${Constant.topHeadLine}?country=in&apiKey=$_apiKey&category=$category";
+        "${Constant.baseUrl}${Constant.topHeadLine}?country=in&apiKey=$_apiKey&category=${category}";
     print("entered Url : $url");
     final response = await client.get(Uri.parse(url));
     // print(response.body.toString());

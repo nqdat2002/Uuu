@@ -5,13 +5,21 @@ import 'package:uuu/src/models/newsResponseModel.dart';
 import 'package:uuu/src/pages/newsDetail/bloc/bloc.dart';
 import 'package:uuu/src/theme/theme.dart';
 
+import '../../authentication/bloc/authenticationBloc.dart';
+import 'chang.dart';
+
 class NewsCard extends StatelessWidget {
   final Article artical;
   final bool isVideoNews;
   final String type;
+
   const NewsCard(
-      {Key? key,required this.artical, this.isVideoNews = false, this.type = ''})
+      {Key? key,
+      required this.artical,
+      this.isVideoNews = false,
+      this.type = ''})
       : super(key: key);
+
   Widget _playWidget(BuildContext context) {
     return SizedBox(
       height: 20,
@@ -33,14 +41,32 @@ class NewsCard extends StatelessWidget {
     );
   }
 
+  Future<void> onTapHandler(BuildContext context, String userEmail) async {
+    try {
+      await incrementReadCount(userEmail, type);
+
+      final detailBloc = BlocProvider.of<DetailBloc>(context);
+      detailBloc.add(SelectNewsForDetail(article: artical));
+
+      Navigator.pushNamed(context, '/detail');
+    } catch (e) {
+      print('Error handling onTap: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text('Error loading article details. Please try again later.'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userEmail =
+        context.select((AuthenticationBloc bloc) => bloc.state.user.email);
+
     return InkWell(
-      onTap: () {
-        BlocProvider.of<DetailBloc>(context)
-            .add(SelectNewsForDetail(article: artical));
-        Navigator.pushNamed(context, '/detail');
-      },
+      onTap: () => onTapHandler(context, userEmail),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -77,7 +103,7 @@ class NewsCard extends StatelessWidget {
                   height: 52,
                   child: Text(
                     artical.title.toString(),
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     overflow: TextOverflow.fade,
                   ),
                 ),

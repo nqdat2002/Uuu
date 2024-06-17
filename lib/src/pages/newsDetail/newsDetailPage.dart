@@ -121,8 +121,6 @@ class NewsDetailPage extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
           },
-        )
-        )
-    );
+        )));
   }
 }

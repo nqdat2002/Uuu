@@ -43,6 +43,7 @@ class Article {
   String? url;
   String? urlToImage;
   DateTime? publishedAt;
+  // String? category;
   String? content;
 
   Article({
@@ -53,6 +54,7 @@ class Article {
     this.url,
     this.urlToImage,
     this.publishedAt,
+    // this.category,
     this.content,
   });
 
@@ -70,6 +72,7 @@ class Article {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        // category: json['category'],
         content: json["content"],
       );
 
@@ -81,6 +84,7 @@ class Article {
         "url": url,
         "urlToImage": urlToImage,
         "publishedAt": publishedAt?.toIso8601String(),
+        // "category": category,
         "content": content,
       };
   String getTime() {

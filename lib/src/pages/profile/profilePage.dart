@@ -3,12 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuu/src/commonWidget/customWidget.dart';
 import 'package:uuu/src/theme/bloc/bloc.dart';
 import 'package:uuu/src/theme/theme.dart';
-
+import 'package:uuu/src/models/user.dart';
 import '../authentication/bloc/authenticationBloc.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  late User user;
   Widget _headerWidget(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -20,7 +27,7 @@ class ProfilePage extends StatelessWidget {
               CircleAvatar(
                 radius: 50,
                 backgroundImage: customAdvanceNetworkImage(
-                    'https://media1.s-nbcnews.com/j/newscms/2019_14/2808721/190403-joaquin-phoenix-joker-cs-1005a_4715890895d3fad1f9e7ccec85386821.fit-760w.jpg'),
+                    'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010'),
                 backgroundColor: Theme.of(context).primaryColor,
               ),
               SizedBox(
@@ -33,13 +40,14 @@ class ProfilePage extends StatelessWidget {
                   Builder(
                     builder: (context) {
                       final userId = context.select(
-                            (AuthenticationBloc bloc) => bloc.state.user.id,
+                            (AuthenticationBloc bloc) => bloc.state.user.email,
                       );
-                      return Text('UserID: $userId', style: AppTheme.h2Style
+                      var displayName = userId.substring(0, 4);
+                      return Text('UserName: $displayName', style: AppTheme.h2Style
                           .copyWith(fontWeight: FontWeight.bold));
                     },
                   ),
-                  // Text('TheAlphamerc',
+                  // Text('The Alphamerc',
                   //     style: AppTheme.h2Style
                   //         .copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 20),

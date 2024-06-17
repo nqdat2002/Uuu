@@ -24,7 +24,33 @@ class LoginPage extends StatelessWidget {
               RepositoryProvider.of<AuthenticationRepository>(context),
             );
           },
-          child: const LoginForm(),
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              Center(
+                child: Image.asset(
+                  'assets/newsapi.png',
+                  height: 100,
+                  width: 100,
+                ),
+              ),
+              const SizedBox(height: 50),
+              const LoginForm(),
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed('/signup');
+                },
+                child: Text(
+                  'SignUp',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

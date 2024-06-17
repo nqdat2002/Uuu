@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
           BlocProvider<NewsBloc>(
-            create: (context) => NewsBloc(repository: Repository())..add(const Fetch(type: 'General')),
+            create: (context) => NewsBloc(repository: Repository())..add(const Fetch(type: 'general')),
           ),
           BlocProvider<DetailBloc>(create: (context) => DetailBloc()),
           BlocProvider<NavigationBloc>(create: (context) => NavigationBloc()),
