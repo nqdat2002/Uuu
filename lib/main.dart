@@ -6,6 +6,7 @@ import 'package:uuu/src/bloc/simple_bloc_delegate.dart';
 import 'package:uuu/src/commonWidget/bloc/bloc.dart';
 import 'package:uuu/src/pages/authentication/bloc/authenticationBloc.dart';
 import 'package:uuu/src/pages/login/bloc/bloc.dart';
+import 'package:uuu/src/pages/signup/bloc/bloc.dart';
 import 'package:uuu/src/theme/bloc/theme_bloc.dart';
 import 'src/pages/homePage/bloc/bloc.dart';
 import 'src/pages/newsDetail/bloc/bloc.dart';
@@ -62,6 +63,9 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<LoginBloc>(
             create: (context) => LoginBloc(authenticationRepository: _authenticationRepository),
           ),
+          BlocProvider<SignupBloc>(
+            create: (context) => SignupBloc(authenticationRepository: _authenticationRepository),
+          )
         ],
         child: const AppView(),
       ),

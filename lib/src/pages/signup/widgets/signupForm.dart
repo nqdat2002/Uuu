@@ -24,7 +24,14 @@ class _SignupFormState extends State<SignupForm> {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Form Invalid')),
+              const SnackBar(content: Text('Form Invalid or Infor is not exact')),
+            );
+        }
+        if (state.status.isSuccess){
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(content: Text('Sign in success')),
             );
         }
       },

@@ -23,7 +23,14 @@ class _LoginFormState extends State<LoginForm> {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Form Invalid')),
+              const SnackBar(content: Text('Form Invalid or Infor is not exac')),
+            );
+        }
+        if (state.status.isSuccess){
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(content: Text('Log in success')),
             );
         }
       },

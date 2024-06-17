@@ -66,6 +66,7 @@ class AuthenticationRepository {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       // print(data);
+
       if (data['status'] == 'success') {
         _controller.add(AuthenticationStatus.authenticated);
       } else {
